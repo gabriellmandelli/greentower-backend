@@ -26,7 +26,7 @@ public class PessoaValidator {
 
     public boolean isPessoaValida(Pessoa pessoa){
 
-        if (pessoa.getNome().isEmpty() || pessoa.getNome().isBlank()){
+        if (pessoa.getNome().isEmpty() || pessoa.getNome().equals(null)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nome obrigatório.");
         }
 
