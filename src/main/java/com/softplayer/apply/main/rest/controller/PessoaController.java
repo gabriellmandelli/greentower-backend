@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/pessoa/v1/")
+@RequestMapping("/pessoa/v1")
 public class PessoaController {
 
     private final PessoaService pessoaService;
@@ -28,7 +28,7 @@ public class PessoaController {
         return ResponseEntity.ok(pessoaService.save(pessoa));
     }
 
-    @PostMapping(value = "{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Pessoa> update(@RequestBody Pessoa pessoa, @PathVariable("id")UUID id){
         return ResponseEntity.ok(pessoaService.update(id, pessoa));
@@ -39,7 +39,7 @@ public class PessoaController {
         return ResponseEntity.ok(pessoaService.findAll());
     }
 
-    @GetMapping(value = "{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Pessoa> findById(@PathVariable("id")UUID id){
         return ResponseEntity.ok(pessoaService.findById(id));
     }
