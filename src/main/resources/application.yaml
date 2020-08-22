@@ -3,7 +3,7 @@ server:
 
 security:
   jwt:
-    expiration-time-minutes: 30
+    expiration-time-minutes: 300
     signing-key: 5X4DZyu9TM2O3NdJcSr
 
 spring:

@@ -50,6 +50,7 @@ public class PessoaControllerV2 {
     @ApiOperation(value = "Atualização de pessoa")
     public ResponseEntity<PessoaDTOv2> update(@RequestBody PessoaDTOv2 pessoaDTO, @PathVariable("id")UUID id){
         Pessoa pessoa = modelMapper.mapTo(pessoaDTO, Pessoa.class);
+        pessoa.setId(id);
         pessoaValidator.isPessoaValida(pessoa);
         pessoa = pessoaService.update(id, pessoa);
         return ResponseEntity.ok(modelMapper.mapTo(pessoa, PessoaDTOv2.class));
@@ -73,5 +74,11 @@ public class PessoaControllerV2 {
     @ApiOperation(value = "Remove todas as pessoas")
     public void deleteAll(){
         pessoaService.deleteAll();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "Remove pessoa por id")
+    public void deleteAll(@PathVariable("id")UUID id){
+        pessoaService.delete(id);
     }
 }
