@@ -40,4 +40,7 @@ public class Pessoa extends GenericEntity implements Serializable {
 
     @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
+
+    @Column(name = "endereco")
+    private String endereco;
 }
