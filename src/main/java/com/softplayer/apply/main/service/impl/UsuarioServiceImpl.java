@@ -44,9 +44,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         Boolean lbAtualizaPassword = (usuarioUpdateDTO.getPassword() != null && usuarioUpdateDTO.getOldPassword() != null && usuarioUpdateDTO.getConfirmPassword() != null);
 
         if (lbAtualizaPassword){
-            lbAtualizaPassword = usuarioUpdateDTO.getOldPassword().equals(usuarioUpdateDTO.getPassword());
-
-            if (lbAtualizaPassword && passwordEncoder.matches(usuarioDb.getPassword(), usuarioUpdateDTO.getOldPassword())){
+            lbAtualizaPassword = usuarioUpdateDTO.getConfirmPassword().equals(usuarioUpdateDTO.getPassword());
+            if (lbAtualizaPassword && passwordEncoder.matches(usuarioUpdateDTO.getOldPassword(), usuarioDb.getPassword())){
                 usuarioDb.setPassword(passwordEncoder.encode(usuarioUpdateDTO.getPassword()));
             }
         }
@@ -87,8 +86,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public UserDetails usuarioAuthenticate(CredencialLoginDTO usuario) {
-        UserDetails user = loadUserByUsername(usuario.getEmail());
+    public User usuarioAuthenticate(CredencialLoginDTO usuario) {
+        User user = (User) loadUserByUsername(usuario.getEmail());
         if (passwordEncoder.matches(usuario.getPassword(), user.getPassword())){
             return user;
         }else{

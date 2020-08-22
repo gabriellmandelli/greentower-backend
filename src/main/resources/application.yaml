@@ -1,6 +1,11 @@
 server:
   port: 8080
 
+security:
+  jwt:
+    expiration-time-minutes: 30
+    signing-key: 5X4DZyu9TM2O3NdJcSr
+
 spring:
   datasource:
     url: jdbc:postgresql://ec2-52-204-20-42.compute-1.amazonaws.com:5432/d3jcklh61ebtk2
@@ -11,15 +16,10 @@ spring:
     show-sql: true
     open-in-view: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
   thymeleaf:
     cache: false
-
-  security:
-    user:
-      name: softplayer
-      password: softplayer

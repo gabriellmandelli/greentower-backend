@@ -3,6 +3,7 @@ package com.softplayer.apply.main.service;
 import com.softplayer.apply.main.domain.entity.Usuario;
 import com.softplayer.apply.main.rest.dto.CredencialLoginDTO;
 import com.softplayer.apply.main.rest.dto.UsuarioUpdateDTO;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -24,5 +25,5 @@ public interface UsuarioService extends UserDetailsService {
 
     UserDetails loadUserByUsername(String email);
 
-    UserDetails usuarioAuthenticate(CredencialLoginDTO usuario);
+    User usuarioAuthenticate(CredencialLoginDTO usuario);
 }

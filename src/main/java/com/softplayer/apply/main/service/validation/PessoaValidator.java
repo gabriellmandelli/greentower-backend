@@ -34,7 +34,7 @@ public class PessoaValidator {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email inválido.");
         }
 
-        if (pessoa.getDataNascimento().after(Date.from(Instant.now()))){
+        if (pessoa.getDataNascimento() == null || pessoa.getDataNascimento().after(Date.from(Instant.now()))){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data de nascimento inválida.");
         }
 

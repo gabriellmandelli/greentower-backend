@@ -1,6 +1,5 @@
 package com.softplayer.apply.main.rest.dto;
 
-import com.softplayer.apply.main.domain.entity.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,9 +9,9 @@ public class TokenRetornoDTO {
 
     private String token;
 
-    private Usuario user;
+    private UsuarioDTO user;
 
-    public TokenRetornoDTO(String token, Usuario user) {
+    public TokenRetornoDTO(String token, UsuarioDTO user) {
         this.token = token;
         this.user = user;
     }
