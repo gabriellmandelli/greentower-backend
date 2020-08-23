@@ -23,11 +23,16 @@ import java.util.Optional;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+
+    @Autowired
+    public JwtAuthenticationFilter(UsuarioService usuarioService, JwtTokenProvider tokenProvider) {
+        this.usuarioService = usuarioService;
+        this.jwtTokenProvider = tokenProvider;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -38,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = authorizationHeader.replace("Bearer ", "");
             this.checkToken(token, new WebAuthenticationDetailsSource().buildDetails(request));
         }else{
-            logger.error("Não foi possivel encontrar o prefixo bearer, o Header vai ser ignorado.");
+            logger.error("Não foi possível encontrar o prefixo bearer, o Header vai ser ignorado.");
         }
 
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -66,7 +71,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (IllegalArgumentException exception){
-            logger.error("Ocorreu um erro durante a busca pelo email apartir do token.", exception);
+            logger.error("Ocorreu um erro durante a busca pelo email a partir do token.", exception);
         } catch (ExpiredJwtException exception){
             logger.warn("O token está expirado e não está mais valido.");
         } catch (SignatureException exception){
