@@ -32,7 +32,7 @@ public class PessoaDTOv2 {
     @ApiModelProperty(value = "Naturalidade da pessoa", example = "Veneziano")
     private String naturalidade;
 
-    @ApiModelProperty(value = "Nascionalidade da pessoa", example = "Brasileiro")
+    @ApiModelProperty(value = "Nacionalidade da pessoa", example = "Brasileiro")
     private String nacionalidade;
 
     @ApiModelProperty(value = "Cpf da pessoa", example = "58362664096")

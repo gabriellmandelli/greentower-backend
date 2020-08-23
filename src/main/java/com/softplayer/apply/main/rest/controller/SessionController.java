@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("")
-@Api(value = "Api Rest Authenticação")
+@Api(value = "Api Rest Autenticação")
 @CrossOrigin(value = "*")
 public class SessionController {
 
@@ -35,7 +35,7 @@ public class SessionController {
     }
 
     @PostMapping(value = "/sessions", produces = {MediaType.APPLICATION_JSON_VALUE})
-    @ApiOperation(value = "Realiza login na sessao")
+    @ApiOperation(value = "Realiza login na sessão")
     public ResponseEntity<TokenRetornoDTO> login(@RequestBody CredencialLoginDTO credencialLogin){
         User userDetails = usuarioService.usuarioAuthenticate(credencialLogin);
         Usuario usuario = usuarioService.findByEmail(credencialLogin.getEmail());

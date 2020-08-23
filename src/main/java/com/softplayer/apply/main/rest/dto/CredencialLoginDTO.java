@@ -8,9 +8,9 @@ import lombok.Setter;
 @Setter
 public class CredencialLoginDTO {
 
-    @ApiModelProperty(value = "Email do usuario", example = "softplayer@softplayer.com")
+    @ApiModelProperty(value = "Email do usuário", example = "softplayer@softplayer.com")
     private String email;
 
-    @ApiModelProperty(value = "Senha do usuario", example = "123456")
+    @ApiModelProperty(value = "Senha do usuário", example = "123456")
     private String password;
 }

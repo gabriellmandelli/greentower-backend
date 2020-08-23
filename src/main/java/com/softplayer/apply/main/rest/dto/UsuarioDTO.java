@@ -10,15 +10,15 @@ import java.util.UUID;
 @Setter
 public class UsuarioDTO {
 
-    @ApiModelProperty(value = "Id do usuario")
+    @ApiModelProperty(value = "Id do usuário")
     private UUID id;
 
-    @ApiModelProperty(value = "Email do usuario", example = "softplayer@softplayer.com", required = true)
+    @ApiModelProperty(value = "Email do usuário", example = "softplayer@softplayer.com", required = true)
     private String email;
 
-    @ApiModelProperty(value = "Nome do usuario", example = "Softplayer", required = true)
+    @ApiModelProperty(value = "Nome do usuário", example = "Softplayer", required = true)
     private String name;
 
-    @ApiModelProperty(value = "Senha do usuario", example = "******", required = true)
+    @ApiModelProperty(value = "Senha do usuário", example = "******", required = true)
     private String password;
 }

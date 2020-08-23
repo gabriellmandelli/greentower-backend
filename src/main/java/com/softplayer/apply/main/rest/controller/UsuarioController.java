@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
-@Api(value = "Api Rest de Usuarios")
+@Api(value = "Api Rest de Usuários")
 @CrossOrigin(value = "*")
 public class UsuarioController {
 
@@ -30,7 +30,7 @@ public class UsuarioController {
 
     @PostMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiOperation(value = "Criação de usuario")
+    @ApiOperation(value = "Criação de usuário")
     public ResponseEntity<UsuarioDTO> save(@RequestBody UsuarioDTO usuarioDTO){
         Usuario usuarioDB = modelMapper.mapTo(usuarioDTO, Usuario.class);
         return ResponseEntity.ok(modelMapper.mapTo(usuarioService.save(usuarioDB), UsuarioDTO.class));
@@ -38,7 +38,7 @@ public class UsuarioController {
 
     @PutMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiOperation(value = "Atualização de usuario")
+    @ApiOperation(value = "Atualização de usuário")
     public ResponseEntity<UsuarioDTO> update(@RequestBody UsuarioUpdateDTO usuarioUpdate){
         return ResponseEntity.ok(modelMapper.mapTo(usuarioService.update(usuarioUpdate), UsuarioDTO.class));
     }
