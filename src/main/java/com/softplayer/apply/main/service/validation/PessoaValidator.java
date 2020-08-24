@@ -24,31 +24,45 @@ public class PessoaValidator {
         this.pessoaRepository = pessoaRepository;
     }
 
-    public boolean isPessoaValida(Pessoa pessoa){
-
+    public void isNomePessoaValido(Pessoa pessoa){
         if (pessoa.getNome() == null || pessoa.getNome().isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nome obrigatório.");
         }
+    }
 
-        if (!validadorUtil.isValidEmailAddress(pessoa.getEmail()) && !pessoa.getEmail().isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email inválido.");
-        }
-
+    public void isDataNascimetnoPessoaValido(Pessoa pessoa){
         if (pessoa.getDataNascimento() == null || pessoa.getDataNascimento().after(Date.from(Instant.now()))){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data de nascimento inválida.");
         }
+    }
 
+    public void isCpfPessoaValido(Pessoa pessoa){
         if (!validadorUtil.isCpfValido(pessoa.getCpf())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cpf inválido.");
         }
+    }
 
+    public void isCpfPessoaExisteDataBase(Pessoa pessoa){
         Optional<Pessoa> pessoaDb = pessoaRepository.findBycpf(pessoa.getCpf());
-
         if (pessoaDb.isPresent()){
             if (!pessoaDb.get().getId().equals(pessoa.getId())){
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cpf informado já existe na base de dados.");
             }
         }
+    }
+
+    public void isEmailPessoaValido(Pessoa pessoa){
+        if (!validadorUtil.isValidEmailAddress(pessoa.getEmail()) && !pessoa.getEmail().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email inválido.");
+        }
+    }
+
+    public boolean isPessoaValida(Pessoa pessoa){
+        this.isNomePessoaValido(pessoa);
+        this.isEmailPessoaValido(pessoa);
+        this.isDataNascimetnoPessoaValido(pessoa);
+        this.isCpfPessoaValido(pessoa);
+        this.isCpfPessoaExisteDataBase(pessoa);
         return true;
     }
 }
