@@ -64,4 +64,10 @@ public class PessoaValidatorTest {
         pessoa.setCpf("12345678912");
         this.pessoaValidator.isCpfPessoaValido(pessoa);
     }
+
+    @Test(expected = ResponseStatusException.class)
+    public void testPessoaEnderecoInvalido() {
+        Pessoa pessoa = new Pessoa();
+        this.pessoaValidator.isEnderecoValido(pessoa);
+    }
 }

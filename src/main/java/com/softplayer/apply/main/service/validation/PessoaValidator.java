@@ -24,45 +24,47 @@ public class PessoaValidator {
         this.pessoaRepository = pessoaRepository;
     }
 
-    public void isNomePessoaValido(Pessoa pessoa){
+    public Boolean isNomePessoaValido(Pessoa pessoa){
         if (pessoa.getNome() == null || pessoa.getNome().isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nome obrigatório.");
         }
+        return true;
     }
 
-    public void isDataNascimetnoPessoaValido(Pessoa pessoa){
+    public Boolean isDataNascimetnoPessoaValido(Pessoa pessoa){
         if (pessoa.getDataNascimento() == null || pessoa.getDataNascimento().after(Date.from(Instant.now()))){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data de nascimento inválida.");
         }
+        return true;
     }
 
-    public void isCpfPessoaValido(Pessoa pessoa){
+    public Boolean isCpfPessoaValido(Pessoa pessoa){
         if (!validadorUtil.isCpfValido(pessoa.getCpf())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cpf inválido.");
         }
+        return true;
     }
 
-    public void isCpfPessoaExisteDataBase(Pessoa pessoa){
+    public Boolean isCpfPessoaExisteDataBase(Pessoa pessoa){
         Optional<Pessoa> pessoaDb = pessoaRepository.findBycpf(pessoa.getCpf());
         if (pessoaDb.isPresent()){
             if (!pessoaDb.get().getId().equals(pessoa.getId())){
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cpf informado já existe na base de dados.");
             }
         }
+        return true;
     }
 
-    public void isEmailPessoaValido(Pessoa pessoa){
+    public Boolean isEmailPessoaValido(Pessoa pessoa){
         if (!validadorUtil.isValidEmailAddress(pessoa.getEmail()) && !pessoa.getEmail().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email inválido.");
         }
+        return true;
     }
 
-    public boolean isPessoaValida(Pessoa pessoa){
-        this.isNomePessoaValido(pessoa);
-        this.isEmailPessoaValido(pessoa);
-        this.isDataNascimetnoPessoaValido(pessoa);
-        this.isCpfPessoaValido(pessoa);
-        this.isCpfPessoaExisteDataBase(pessoa);
-        return true;
+    public void isEnderecoValido(Pessoa pessoa){
+        if (pessoa.getEndereco() == null || pessoa.getEndereco().isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Endereço obrigatório.");
+        }
     }
 }

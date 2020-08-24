@@ -41,7 +41,13 @@ public class PessoaController {
     @ApiOperation(value = "Criação de pessoa")
     public ResponseEntity<PessoaDTO> save(@RequestBody PessoaDTO pessoaDTO){
         Pessoa pessoa = modelMapper.mapTo(pessoaDTO, Pessoa.class);
-        pessoaValidator.isPessoaValida(pessoa);
+
+        pessoaValidator.isNomePessoaValido(pessoa);
+        pessoaValidator.isEmailPessoaValido(pessoa);
+        pessoaValidator.isDataNascimetnoPessoaValido(pessoa);
+        pessoaValidator.isCpfPessoaValido(pessoa);
+        pessoaValidator.isCpfPessoaExisteDataBase(pessoa);
+
         pessoa = pessoaService.save(pessoa);
         return ResponseEntity.ok(modelMapper.mapTo(pessoa, PessoaDTO.class));
     }
@@ -52,7 +58,13 @@ public class PessoaController {
     public ResponseEntity<PessoaDTO> update(@RequestBody PessoaDTO pessoaDTO, @PathVariable("id")UUID id){
         Pessoa pessoa = modelMapper.mapTo(pessoaDTO, Pessoa.class);
         pessoa.setId(id);
-        pessoaValidator.isPessoaValida(pessoa);
+
+        pessoaValidator.isNomePessoaValido(pessoa);
+        pessoaValidator.isEmailPessoaValido(pessoa);
+        pessoaValidator.isDataNascimetnoPessoaValido(pessoa);
+        pessoaValidator.isCpfPessoaValido(pessoa);
+        pessoaValidator.isCpfPessoaExisteDataBase(pessoa);
+
         pessoa = pessoaService.update(id, pessoa);
         return ResponseEntity.ok(modelMapper.mapTo(pessoa, PessoaDTO.class));
     }

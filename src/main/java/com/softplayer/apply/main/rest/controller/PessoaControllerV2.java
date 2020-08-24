@@ -4,7 +4,7 @@ import com.softplayer.apply.infrastructure.util.MapperUtil;
 import com.softplayer.apply.main.domain.entity.Pessoa;
 import com.softplayer.apply.main.rest.dto.PessoaDTOv2;
 import com.softplayer.apply.main.service.PessoaService;
-import com.softplayer.apply.main.service.validation.PessoaValidatorV2;
+import com.softplayer.apply.main.service.validation.PessoaValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +27,10 @@ public class PessoaControllerV2 {
 
     private final MapperUtil modelMapper;
 
-    private final PessoaValidatorV2 pessoaValidator;
+    private final PessoaValidator pessoaValidator;
 
     @Autowired
-    public PessoaControllerV2(PessoaService pessoaService, MapperUtil modelMapper, PessoaValidatorV2 pessoaValidator){
+    public PessoaControllerV2(PessoaService pessoaService, MapperUtil modelMapper, PessoaValidator pessoaValidator){
         this.pessoaService = pessoaService;
         this.modelMapper = modelMapper;
         this.pessoaValidator = pessoaValidator;
@@ -41,7 +41,14 @@ public class PessoaControllerV2 {
     @ApiOperation(value = "Criação de pessoa")
     public ResponseEntity<PessoaDTOv2> save(@RequestBody PessoaDTOv2 pessoaDTO){
         Pessoa pessoa = modelMapper.mapTo(pessoaDTO, Pessoa.class);
-        pessoaValidator.isPessoaValida(pessoa);
+
+        pessoaValidator.isNomePessoaValido(pessoa);
+        pessoaValidator.isEmailPessoaValido(pessoa);
+        pessoaValidator.isDataNascimetnoPessoaValido(pessoa);
+        pessoaValidator.isCpfPessoaValido(pessoa);
+        pessoaValidator.isCpfPessoaExisteDataBase(pessoa);
+        pessoaValidator.isEnderecoValido(pessoa);
+
         pessoa = pessoaService.save(pessoa);
         return ResponseEntity.ok(modelMapper.mapTo(pessoa, PessoaDTOv2.class));
     }
@@ -52,7 +59,14 @@ public class PessoaControllerV2 {
     public ResponseEntity<PessoaDTOv2> update(@RequestBody PessoaDTOv2 pessoaDTO, @PathVariable("id")UUID id){
         Pessoa pessoa = modelMapper.mapTo(pessoaDTO, Pessoa.class);
         pessoa.setId(id);
-        pessoaValidator.isPessoaValida(pessoa);
+
+        pessoaValidator.isNomePessoaValido(pessoa);
+        pessoaValidator.isEmailPessoaValido(pessoa);
+        pessoaValidator.isDataNascimetnoPessoaValido(pessoa);
+        pessoaValidator.isCpfPessoaValido(pessoa);
+        pessoaValidator.isCpfPessoaExisteDataBase(pessoa);
+        pessoaValidator.isEnderecoValido(pessoa);
+
         pessoa = pessoaService.update(id, pessoa);
         return ResponseEntity.ok(modelMapper.mapTo(pessoa, PessoaDTOv2.class));
     }
