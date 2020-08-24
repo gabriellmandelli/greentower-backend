@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,8 +61,11 @@ public class PessoaController {
     @ApiOperation(value = "Busca todas as pessoas")
     public ResponseEntity<List<PessoaDTO>> findAll(){
         List<Pessoa> pessoaList = pessoaService.findAll();
-
-        return ResponseEntity.ok( modelMapper.mapTo(pessoaList, PessoaDTO.class));
+        if (pessoaList.isEmpty()){
+            return ResponseEntity.ok(Collections.emptyList());
+        }else{
+            return ResponseEntity.ok(modelMapper.mapTo(pessoaList, PessoaDTO.class));
+        }
     }
 
     @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -70,15 +74,9 @@ public class PessoaController {
         return ResponseEntity.ok(modelMapper.mapTo(pessoaService.findById(id), PessoaDTO.class));
     }
 
-    @DeleteMapping(value = "")
-    @ApiOperation(value = "Remove todas as pessoas")
-    public void deleteAll(){
-        pessoaService.deleteAll();
-    }
-
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Remove pessoa por id")
-    public void deleteAll(@PathVariable("id")UUID id){
+    public void deleteById(@PathVariable("id")UUID id){
         pessoaService.delete(id);
     }
 }

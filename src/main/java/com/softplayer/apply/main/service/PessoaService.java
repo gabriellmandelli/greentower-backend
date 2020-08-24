@@ -13,8 +13,6 @@ public interface PessoaService {
 
     void delete(UUID idPessoa);
 
-    void deleteAll();
-
     List<Pessoa> findAll();
 
     Pessoa findById(UUID id);

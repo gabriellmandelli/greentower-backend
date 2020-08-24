@@ -4,7 +4,9 @@ import com.softplayer.apply.main.domain.entity.Pessoa;
 import com.softplayer.apply.main.domain.repository.PessoaRepository;
 import com.softplayer.apply.main.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,17 +38,14 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
-    public void deleteAll() {
-        pessoaRepository.deleteAll();
-    }
-
-    @Override
     public List<Pessoa> findAll() {
-        return pessoaRepository.findAll();
+        return pessoaRepository.findAllByOrderByNome();
     }
 
     @Override
     public Pessoa findById(UUID idPessoa) {
-        return pessoaRepository.findById(idPessoa).orElse(null);
+        return pessoaRepository.findById(idPessoa).orElseThrow(() -> {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa com o id: " + idPessoa.toString() + " não encontrada.");
+        });
     }
 }
