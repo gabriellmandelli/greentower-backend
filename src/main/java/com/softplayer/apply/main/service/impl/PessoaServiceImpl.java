@@ -44,8 +44,6 @@ public class PessoaServiceImpl implements PessoaService {
 
     @Override
     public Pessoa findById(UUID idPessoa) {
-        return pessoaRepository.findById(idPessoa).orElseThrow(() -> {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa com o id: " + idPessoa.toString() + " não encontrada.");
-        });
+        return pessoaRepository.findById(idPessoa).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa com o id: " + idPessoa.toString() + " não encontrada."));
     }
 }
