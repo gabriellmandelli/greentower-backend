@@ -8,15 +8,15 @@ security:
 
 spring:
   datasource:
-    url: jdbc:postgresql://ec2-52-204-20-42.compute-1.amazonaws.com:5432/d3jcklh61ebtk2
-    username: kbrbigxmthwapa
-    password: 2b5c7d00e4d7ca60538023b19954967640e362deb983bdae669504a80f69c657
+    url: jdbc:postgresql://ec2-54-144-177-189.compute-1.amazonaws.com:5432/d8iervn08olq2d
+    username: qhhiqiyhcutwnj
+    password: cc014d4a81eb69d483f13218d5c35358b63da918b782387eb0e7a01e70545171
 
   jpa:
     show-sql: true
     open-in-view: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
