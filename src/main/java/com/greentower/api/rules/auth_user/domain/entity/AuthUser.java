@@ -1,7 +1,7 @@
 package com.greentower.api.rules.auth_user.domain.entity;
 
+import com.greentower.api.core.generic.GenericClass;
 import com.greentower.api.rules.auth_user.domain.enums.Role;
-import com.greentower.api.core.generic.GenericEntity;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -15,8 +15,8 @@ import java.io.Serializable;
 @Builder
 @EqualsAndHashCode(callSuper=false)
 @Entity
-@Table(name = "usuario")
-public class Usuario extends GenericEntity implements Serializable {
+@Table(name = "auth_user")
+public class AuthUser implements GenericClass, Serializable {
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;

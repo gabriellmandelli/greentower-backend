@@ -19,12 +19,12 @@ public final class MapperUtil {
 
     public <TSource, TResult> List<TResult> mapTo(final List<TSource> sourceList, final Class<TResult> destinationType) {
         List<TResult> resultList = new ArrayList<>();
-        if (!Objects.isNull(sourceList)){
+        if (Objects.isNull(sourceList)){
+            resultList = Collections.emptyList();
+        }else{
             for (TSource item : sourceList) {
                 resultList.add(mapper.map(item, destinationType));
             }
-        }else{
-            resultList = Collections.emptyList();
         }
         return resultList;
     }

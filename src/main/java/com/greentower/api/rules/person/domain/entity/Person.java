@@ -1,7 +1,7 @@
 package com.greentower.api.rules.person.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.greentower.api.rules.person.domain.enums.Sexo;
+import com.greentower.api.rules.person.domain.enums.Gender;
 import com.greentower.api.core.generic.GenericEntity;
 import lombok.*;
 
@@ -15,32 +15,32 @@ import java.util.Date;
 @Builder
 @EqualsAndHashCode(callSuper=false)
 @Entity
-@Table(name = "pessoa")
-public class Pessoa extends GenericEntity implements Serializable {
+@Table(name = "person")
+public class Person extends GenericEntity implements Serializable {
 
     @Column(name = "nome", nullable = false)
-    private String nome;
+    private String name;
 
     @Column(name = "email")
     private String email;
 
     @Column(name = "sexo")
     @Enumerated(EnumType.STRING)
-    private Sexo sexo;
+    private Gender gender;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "data_nascimento", nullable = false)
-    private Date dataNascimento;
+    @Column(name = "date_of_birth", nullable = false)
+    private Date dateOfBirth;
 
-    @Column(name = "naturalidade")
-    private String naturalidade;
+    @Column(name = "naturalness")
+    private String naturalness;
 
-    @Column(name = "nacionalidade")
-    private String nacionalidade;
+    @Column(name = "nationality")
+    private String nationality;
 
     @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
 
-    @Column(name = "endereco")
-    private String endereco;
+    @Column(name = "address")
+    private String address;
 }

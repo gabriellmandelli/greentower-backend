@@ -1,7 +1,7 @@
 package com.greentower.api.rules.person.service.impl;
 
-import com.greentower.api.rules.person.domain.entity.Pessoa;
-import com.greentower.api.rules.person.domain.repository.PessoaRepository;
+import com.greentower.api.rules.person.domain.entity.Person;
+import com.greentower.api.rules.person.domain.repository.PersonRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
-public class PessoaServiceTest {
+public class PersonServiceTest {
 
     @InjectMocks
-    private PessoaServiceImpl pessoaService;
+    private PersonServiceImpl personService;
 
     @Mock
-    private PessoaRepository pessoaRepository;
+    private PersonRepository personRepository;
 
     @Before
     public void setUp(){
@@ -31,13 +31,13 @@ public class PessoaServiceTest {
 
     @Test(expected = ResponseStatusException.class)
     public void testFindByID() {
-        UUID idPessoa = UUID.randomUUID();
-        pessoaService.findById(idPessoa);
+        UUID personId = UUID.randomUUID();
+        personService.findById(personId);
     }
 
     @Test
     public void testFindAllEmpty(){
-        List<Pessoa> pessoaList = pessoaService.findAll();
-        Assert.assertEquals(pessoaList, Collections.emptyList());
+        List<Person> personList = personService.findAll();
+        Assert.assertEquals(personList, Collections.emptyList());
     }
 }

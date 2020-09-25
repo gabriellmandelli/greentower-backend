@@ -6,15 +6,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TokenRetornoDTO {
+public class PayloadSessionDTO {
 
-    @ApiModelProperty(value = "Token da sessão")
+    @ApiModelProperty(value = "Session Token")
     private String token;
 
-    @ApiModelProperty(value = "Usuário da sessão")
-    private UsuarioSessionDTO user;
+    @ApiModelProperty(value = "Session User")
+    private AuthUserSessionDTO user;
 
-    public TokenRetornoDTO(String token, UsuarioSessionDTO user) {
+    public PayloadSessionDTO(String token, AuthUserSessionDTO user) {
         this.token = token;
         this.user = user;
     }

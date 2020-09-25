@@ -6,11 +6,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CredencialLoginDTO {
+public class SessionLoginDTO {
 
-    @ApiModelProperty(value = "Email do usuário", example = "softplayer@softplayer.com")
+    @ApiModelProperty(value = "User email", example = "greensoftware@greensoftware.com", required = true)
     private String email;
 
-    @ApiModelProperty(value = "Senha do usuário", example = "123456")
+    @ApiModelProperty(value = "User password", example = "******")
     private String password;
 }

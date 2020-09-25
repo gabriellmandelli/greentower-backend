@@ -37,7 +37,7 @@ public class JwtTokenProvider {
         }
     }
 
-    public String generateTokenByUsuario(User user){
+    public String generateTokenByAuthUser(User user){
         Date dataExpiracao = Date.from(LocalDateTime.now().plusMinutes(jwtPropertiesConfig.getExpirationTimeMinutes()).atZone(ZoneId.systemDefault()).toInstant());
 
         return Jwts.builder()
