@@ -1,36 +1,37 @@
-# Softplayer-java-apply
-Aplicação criada conforme os requisitos em [Softplayer-Java-Apply](https://github.com/softplan/softplayer-java-apply).
+# GreenTower-Api
+Application created to register people who are part of Green Software.
 
-## Requisitos
+## Requirements
 - Java 8+
 - Gradle
 - PostgreSql
 
-## Para executar
-Utilizando a IDE IntelliJ IDEA configurar a classe Main e executar o projeto.
-O banco PostgreSQL já esta está hospedado no Heroku.
+## Runing
+Using the IDE IntelliJ IDEA configure the Main class and execute the project.
 
-Para testar no Insomnia, importar o Json disponível em [Api-Docs](https://softplayer-apply-backend.herokuapp.com/v2/api-docs) contendo todos os metodos da aplicação.  
+The database is hosted on Heroku
 
-Obs.: o frontend dessa aplicação se encontra em [softplayer-apply-frontend](https://github.com/gabriellmandelli/softplayer-apply-frontend) contendo um README com as instruções para execução do mesmo.
+To access all endpoints in the Insomnia, import Json available on [Api-Docs](https://greentower-backend.herokuapp.com/v2/api-docs).  
+
+The frontend of that application is in[greensoftware-frontend](https://github.com/gabriellmandelli/greentower-frontend).
 
 ## Disponível
-* Email e senha para login:
+- Email and password to login:
     ```
     {
-        email: "softplayer@softplayer.com",
+        email: "greensoftware@greensoftware.com",
         password: "123456"
     }
     ```
-- Backend hospedado no HEROKU [disponível aqui](https://softplayer-apply-backend.herokuapp.com/)
-- Frontend feito em ReactJs hospedado no HEROKU [disponível aqui](https://softplayer-apply-frontend.herokuapp.com/)
-- Documentação criada com o SWAGGER [disponível aqui](https://softplayer-apply-backend.herokuapp.com/swagger-ui.html#/)
-- Docker disponível em [DockerHub](https://hub.docker.com/r/gabriellmandelli/softplayer-java-apply):  
-`
-docker pull gabriellmandelli/softplayer-java-apply:latest
-`
+- Backend deployed on HEROKU [available here](https://greentower-backend.herokuapp.com/)
+- Frontend created with ReactJs and deployed on HEROKU [available here](https://greentower-frontend.herokuapp.com/)
+- Documentation created by Swagger [available here](https://greentower-backend.herokuapp.com/swagger-ui.html#/)
+- Docker hosted on [DockerHub](https://hub.docker.com/r/gabriellmandelli/greentower), to execute run:  
+    ```
+    docker pull gabriellmandelli/softplayer-java-apply:latest
+    ```
 
-## Dependências utilizadas
+## Dependencies
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Web](https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications)
 - [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/htmlsingle/#boot-features-jpa-and-spring-data)
@@ -41,7 +42,7 @@ docker pull gabriellmandelli/softplayer-java-apply:latest
 - [ModelMapper](http://modelmapper.org/)
 - [Lombok](https://projectlombok.org/)
 
-## Ferramentas Utilizadas
+## Tools used
 - [Spring Initializr](https://start.spring.io/)
 - [Heroku](https://www.heroku.com/)
 - IntelliJIDE

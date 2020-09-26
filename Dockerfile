@@ -12,6 +12,6 @@ EXPOSE 8080
 
 RUN mkdir /app
 
-COPY --from=build /home/gradle/src/build/libs/*.jar /app-softplayer.jar
+COPY --from=build /home/gradle/src/build/libs/*.jar /greentower-api.jar
 
-CMD ["java","-jar","seed-springboot.jar"]
+CMD ["java","-jar","greentower-api.jar"]
