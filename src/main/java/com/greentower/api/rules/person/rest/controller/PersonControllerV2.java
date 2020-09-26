@@ -23,16 +23,14 @@ import java.util.UUID;
 @CrossOrigin(value = "*")
 public class PersonControllerV2 {
 
-    private final PersonService personService;
-
     private final MapperUtil modelMapper;
-
+    private final PersonService personService;
     private final PersonValidator personValidator;
 
     @Autowired
-    public PersonControllerV2(PersonService personService, MapperUtil modelMapper, PersonValidator personValidator){
-        this.personService = personService;
+    public PersonControllerV2(MapperUtil modelMapper, PersonService personService, PersonValidator personValidator){
         this.modelMapper = modelMapper;
+        this.personService = personService;
         this.personValidator = personValidator;
     }
 

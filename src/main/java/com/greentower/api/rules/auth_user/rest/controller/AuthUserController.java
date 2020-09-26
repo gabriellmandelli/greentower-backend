@@ -1,10 +1,10 @@
 package com.greentower.api.rules.auth_user.rest.controller;
 
+import com.greentower.api.core.util.MapperUtil;
 import com.greentower.api.rules.auth_user.domain.entity.AuthUser;
 import com.greentower.api.rules.auth_user.rest.dto.AuthUserDTO;
 import com.greentower.api.rules.auth_user.rest.dto.AuthUserUpdateDTO;
 import com.greentower.api.rules.auth_user.service.AuthUserService;
-import com.greentower.api.core.util.MapperUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

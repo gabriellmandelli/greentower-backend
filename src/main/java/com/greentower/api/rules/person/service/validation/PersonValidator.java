@@ -1,8 +1,8 @@
 package com.greentower.api.rules.person.service.validation;
 
-import com.greentower.api.rules.person.util.ValidatorUtil;
 import com.greentower.api.rules.person.domain.entity.Person;
 import com.greentower.api.rules.person.domain.repository.PersonRepository;
+import com.greentower.api.rules.person.util.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

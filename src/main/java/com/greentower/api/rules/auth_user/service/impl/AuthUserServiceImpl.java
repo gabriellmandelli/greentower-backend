@@ -1,6 +1,7 @@
 package com.greentower.api.rules.auth_user.service.impl;
 
 import com.greentower.api.rules.auth_user.domain.entity.AuthUser;
+import com.greentower.api.rules.auth_user.domain.enums.Role;
 import com.greentower.api.rules.auth_user.domain.repository.AuthUserRepository;
 import com.greentower.api.rules.auth_user.rest.dto.AuthUserUpdateDTO;
 import com.greentower.api.rules.auth_user.service.AuthUserService;
@@ -27,6 +28,7 @@ public class AuthUserServiceImpl implements AuthUserService {
 
     @Override
     public AuthUser save(AuthUser authUser) {
+        authUser.setRole(Role.ADMIN);
         authUser.setPassword(passwordEncoder.encode(authUser.getPassword()));
         return authUserRepository.save(authUser);
     }

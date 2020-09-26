@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface PersonRepository extends GenericRepository<Person> {
     Optional<Person> findBycpf(String cpf);
 
-    List<Person> findAllByOrderByNome();
+    List<Person> findAllByOrderByName();
 }

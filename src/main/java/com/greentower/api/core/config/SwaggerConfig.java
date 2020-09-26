@@ -35,8 +35,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("Projeto Java Apply ")
-                .description("Este projeto é um desafio para uma vaga na softplan.")
+                .title("Project GreenTower Software")
+                .description("GreenTower proving knowledge.")
                 .version("0.0.1")
                 .contact(contact())
                 .build();

@@ -1,7 +1,7 @@
 package com.greentower.api.rules.person.service.impl;
 
-import com.greentower.api.rules.person.domain.enums.Gender;
 import com.greentower.api.rules.person.domain.entity.Person;
+import com.greentower.api.rules.person.domain.enums.Gender;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,8 +19,8 @@ public class PersonEntityTest {
         UUID personId = UUID.randomUUID();
 
         person.setId(personId);
-        person.setName("Softplayer");
-        person.setEmail("softplayer@softplayer.com");
+        person.setName("GreenTower Software");
+        person.setEmail("grentower@grentower.com");
         person.setGender(Gender.MALE);
         person.setDateOfBirth(dataNascimento);
         person.setNaturalness("Veneziano");
@@ -29,8 +29,8 @@ public class PersonEntityTest {
         person.setAddress("Estrado geral, linha mandelli, SN");
 
         Assert.assertEquals(person.getId(), personId);
-        Assert.assertEquals(person.getName(), "Softplayer");
-        Assert.assertEquals(person.getEmail(), "softplayer@softplayer.com");
+        Assert.assertEquals(person.getName(), "Greentower");
+        Assert.assertEquals(person.getEmail(), "greentower@greentower.com");
         Assert.assertEquals(person.getGender(), Gender.MALE);
         Assert.assertEquals(person.getDateOfBirth(), dataNascimento);
         Assert.assertEquals(person.getNaturalness(), "Veneziano");

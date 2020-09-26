@@ -1,8 +1,8 @@
 package com.greentower.api.rules.person.service.impl;
 
+import com.greentower.api.rules.person.domain.entity.Person;
 import com.greentower.api.rules.person.domain.repository.PersonRepository;
 import com.greentower.api.rules.person.service.PersonService;
-import com.greentower.api.rules.person.domain.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -39,7 +39,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> findAll() {
-        return personRepository.findAllByOrderByNome();
+        return personRepository.findAllByOrderByName();
     }
 
     @Override

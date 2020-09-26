@@ -1,6 +1,7 @@
 package com.greentower.api.core.config;
 
 import com.greentower.api.core.security.JwtAuthenticationFilter;
+import com.greentower.api.rules.auth_user.domain.enums.Role;
 import com.greentower.api.rules.auth_user.service.impl.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -55,8 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/configuration/security").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/webjars/**").permitAll()
-                .antMatchers("/pessoa/v1/**").hasAnyRole("ADMIN")
-                .antMatchers("/pessoa/v2/**").hasAnyRole("ADMIN")
+                .antMatchers("/person/v1/**").hasAnyRole(Role.ADMIN.toString())
+                .antMatchers("/person/v2/**").hasAnyRole(Role.ADMIN.toString())
                 .antMatchers("/users").permitAll()
                 .antMatchers("/sessions").permitAll()
                 .anyRequest().authenticated()

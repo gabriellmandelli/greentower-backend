@@ -3,6 +3,7 @@ package com.greentower.api.core.security;
 import com.google.common.net.HttpHeaders;
 import com.greentower.api.rules.auth_user.service.impl.JwtUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,7 +46,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }else{
             logger.error("Não foi possível encontrar o prefixo bearer, o Header vai ser ignorado.");
         }
-        filterChain.doFilter(request, response);
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "authorization, content-type, xsrf-token, Cache-Control");
+        response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
+
+        if ("OPTIONS".equals(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            filterChain.doFilter(request, response);
+        }
     }
 
     private void checkToken(String token, WebAuthenticationDetails authDetails){
@@ -60,12 +71,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
-        } catch (IllegalArgumentException exception){
-            logger.error("Ocorreu um erro durante a busca pelo email a partir do token.", exception);
+        } catch (IllegalArgumentException exception ){
+            logger.error("An error occurred during while getting username from token.", exception);
         } catch (ExpiredJwtException exception){
-            logger.warn("O token está expirado e não está mais valido.");
+            logger.warn("The token is expired and not valid anymore.");
+        } catch (MalformedJwtException exception){
+            logger.error("Authentication Failed. Unable to read JSON value.", exception);
         } catch (SignatureException exception){
-            logger.error("Falha na autenticação. O email ou senha não são validos.", exception);
+            logger.error("Authentication Failed. Username or Password not valid.", exception);
         }
     }
 }

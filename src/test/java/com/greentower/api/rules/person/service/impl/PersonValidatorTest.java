@@ -48,7 +48,7 @@ public class PersonValidatorTest {
     @Test
     public void testPersonEmailInvalid() {
         Person person = new Person();
-        person.setEmail("softplayer@");
+        person.setEmail("greentower@");
         Assert.assertFalse(this.personValidator.isPersonEmailValid(person));
     }
 

@@ -1,9 +1,9 @@
 package com.greentower.api.rules.person.rest.controller;
 
+import com.greentower.api.core.util.MapperUtil;
 import com.greentower.api.rules.person.domain.entity.Person;
 import com.greentower.api.rules.person.rest.dto.PersonDTO;
 import com.greentower.api.rules.person.service.PersonService;
-import com.greentower.api.core.util.MapperUtil;
 import com.greentower.api.rules.person.service.validation.PersonValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,19 +20,17 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/person/v1")
 @Api(value = "Person Api Rest v1")
-@CrossOrigin(value = "*")
+@CrossOrigin(origins = "Access-Control-Allow-Origin: *")
 public class PersonController {
 
-    private final PersonService personService;
-
     private final MapperUtil modelMapper;
-
+    private final PersonService personService;
     private final PersonValidator personValidator;
 
     @Autowired
-    public PersonController(PersonService personService, MapperUtil modelMapper, PersonValidator personValidator){
-        this.personService = personService;
+    public PersonController(MapperUtil modelMapper, PersonService personService, PersonValidator personValidator){
         this.modelMapper = modelMapper;
+        this.personService = personService;
         this.personValidator = personValidator;
     }
 
@@ -41,6 +39,7 @@ public class PersonController {
     @ApiOperation(value = "Create person")
     public ResponseEntity<PersonDTO> save(@RequestBody PersonDTO personDTO){
         Person person = modelMapper.mapTo(personDTO, Person.class);
+
 
         personValidator.isPersonNameValid(person);
         personValidator.isPersonEmailValid(person);
