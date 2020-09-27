@@ -19,8 +19,8 @@ public class PersonEntityTest {
         UUID personId = UUID.randomUUID();
 
         person.setId(personId);
-        person.setName("GreenTower Software");
-        person.setEmail("grentower@grentower.com");
+        person.setName("GreenTower");
+        person.setEmail("greentower@greentower.com");
         person.setGender(Gender.MALE);
         person.setDateOfBirth(dataNascimento);
         person.setNaturalness("Veneziano");
@@ -29,7 +29,7 @@ public class PersonEntityTest {
         person.setAddress("Estrado geral, linha mandelli, SN");
 
         Assert.assertEquals(person.getId(), personId);
-        Assert.assertEquals(person.getName(), "Greentower");
+        Assert.assertEquals(person.getName(), "GreenTower");
         Assert.assertEquals(person.getEmail(), "greentower@greentower.com");
         Assert.assertEquals(person.getGender(), Gender.MALE);
         Assert.assertEquals(person.getDateOfBirth(), dataNascimento);

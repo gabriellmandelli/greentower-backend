@@ -1,11 +1,7 @@
 package com.greentower.api.rules.auth_user.rest.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class PayloadSessionDTO {
 
     @ApiModelProperty(value = "Session Token")
@@ -16,6 +12,22 @@ public class PayloadSessionDTO {
 
     public PayloadSessionDTO(String token, AuthUserSessionDTO user) {
         this.token = token;
+        this.user = user;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public AuthUserSessionDTO getUser() {
+        return user;
+    }
+
+    public void setUser(AuthUserSessionDTO user) {
         this.user = user;
     }
 }

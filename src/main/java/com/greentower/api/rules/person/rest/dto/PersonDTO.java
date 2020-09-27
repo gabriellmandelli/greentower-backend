@@ -3,14 +3,10 @@ package com.greentower.api.rules.person.rest.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.greentower.api.rules.person.domain.enums.Gender;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Date;
 import java.util.UUID;
 
-@Getter
-@Setter
 public class PersonDTO {
 
     @ApiModelProperty(value = "Person id")
@@ -37,4 +33,68 @@ public class PersonDTO {
 
     @ApiModelProperty(value = "Person cpf", example = "58362664096")
     private String cpf;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getNaturalness() {
+        return naturalness;
+    }
+
+    public void setNaturalness(String naturalness) {
+        this.naturalness = naturalness;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 }
