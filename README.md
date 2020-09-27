@@ -13,7 +13,7 @@ The database is hosted on Heroku
 
 To access all endpoints in the Insomnia, import Json available on [Api-Docs](https://greentower-backend.herokuapp.com/v2/api-docs).  
 
-The frontend of that application is in[greensoftware-frontend](https://github.com/gabriellmandelli/greentower-frontend).
+The frontend of that application is in [greensoftware-frontend](https://github.com/gabriellmandelli/greentower-frontend).
 
 ## Disponível
 - Email and password to login:
@@ -40,7 +40,6 @@ The frontend of that application is in[greensoftware-frontend](https://github.co
 - [FlywayDB](https://flywaydb.org/)
 - [Swagger](https://swagger.io/)
 - [ModelMapper](http://modelmapper.org/)
-- [Lombok](https://projectlombok.org/)
 
 ## Tools used
 - [Spring Initializr](https://start.spring.io/)
