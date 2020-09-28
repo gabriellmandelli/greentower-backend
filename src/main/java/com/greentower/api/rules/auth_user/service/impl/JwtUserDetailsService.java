@@ -3,7 +3,6 @@ package com.greentower.api.rules.auth_user.service.impl;
 import com.greentower.api.rules.auth_user.domain.entity.AuthUser;
 import com.greentower.api.rules.auth_user.domain.repository.AuthUserRepository;
 import com.greentower.api.rules.auth_user.rest.dto.SessionLoginDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -18,10 +17,8 @@ import org.springframework.web.server.ResponseStatusException;
 public class JwtUserDetailsService implements UserDetailsService {
 
     private final PasswordEncoder passwordEncoder;
-
     private final AuthUserRepository authUserRepository;
 
-    @Autowired
     public JwtUserDetailsService(PasswordEncoder passwordEncoder, AuthUserRepository authUserRepository) {
         this.passwordEncoder = passwordEncoder;
         this.authUserRepository = authUserRepository;

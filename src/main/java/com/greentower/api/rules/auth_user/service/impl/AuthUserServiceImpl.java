@@ -5,7 +5,6 @@ import com.greentower.api.rules.auth_user.domain.enums.Role;
 import com.greentower.api.rules.auth_user.domain.repository.AuthUserRepository;
 import com.greentower.api.rules.auth_user.rest.dto.AuthUserUpdateDTO;
 import com.greentower.api.rules.auth_user.service.AuthUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,13 +16,12 @@ import java.util.UUID;
 @Service
 public class AuthUserServiceImpl implements AuthUserService {
 
-    private final AuthUserRepository authUserRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthUserRepository authUserRepository;
 
-    @Autowired
     public AuthUserServiceImpl(AuthUserRepository authUserRepository, PasswordEncoder passwordEncoder){
-        this.authUserRepository = authUserRepository;
         this.passwordEncoder = passwordEncoder;
+        this.authUserRepository = authUserRepository;
     }
 
     @Override

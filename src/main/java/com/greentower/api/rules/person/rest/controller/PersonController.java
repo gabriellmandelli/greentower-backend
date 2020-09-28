@@ -7,7 +7,6 @@ import com.greentower.api.rules.person.service.PersonService;
 import com.greentower.api.rules.person.service.validation.PersonValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +26,6 @@ public class PersonController {
     private final PersonService personService;
     private final PersonValidator personValidator;
 
-    @Autowired
     public PersonController(MapperUtil modelMapper, PersonService personService, PersonValidator personValidator){
         this.modelMapper = modelMapper;
         this.personService = personService;
@@ -39,7 +37,6 @@ public class PersonController {
     @ApiOperation(value = "Create person")
     public ResponseEntity<PersonDTO> save(@RequestBody PersonDTO personDTO){
         Person person = modelMapper.mapTo(personDTO, Person.class);
-
 
         personValidator.isPersonNameValid(person);
         personValidator.isPersonEmailValid(person);
@@ -56,7 +53,6 @@ public class PersonController {
     @ApiOperation(value = "Update person")
     public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO personDTO, @PathVariable("id")UUID id){
         Person person = modelMapper.mapTo(personDTO, Person.class);
-        person.setId(id);
 
         personValidator.isPersonNameValid(person);
         personValidator.isPersonEmailValid(person);

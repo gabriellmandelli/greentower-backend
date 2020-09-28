@@ -4,7 +4,6 @@ import com.greentower.api.core.config.JwtPropertiesConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
@@ -17,8 +16,11 @@ import java.util.Optional;
 @Component
 public class JwtTokenProvider {
 
-    @Autowired
-    private JwtPropertiesConfig jwtPropertiesConfig;
+    private final JwtPropertiesConfig jwtPropertiesConfig;
+
+    public JwtTokenProvider(JwtPropertiesConfig jwtPropertiesConfig){
+        this.jwtPropertiesConfig = jwtPropertiesConfig;
+    }
 
     private final String AUTHORITIES_KEY = "scopes";
 

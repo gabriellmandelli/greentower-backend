@@ -34,6 +34,9 @@ public class PersonDTO {
     @ApiModelProperty(value = "Person cpf", example = "58362664096")
     private String cpf;
 
+    @ApiModelProperty(value = "Person address", example = "Estrada geral, linha mandelli, SN", required = true)
+    private String address;
+
     public UUID getId() {
         return id;
     }
@@ -96,5 +99,13 @@ public class PersonDTO {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

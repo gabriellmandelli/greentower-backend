@@ -5,7 +5,6 @@ import com.greentower.api.rules.auth_user.service.impl.JwtUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -24,15 +23,12 @@ import java.util.Optional;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+    private JwtTokenProvider jwtTokenProvider;
     private JwtUserDetailsService jwtUserDetailsService;
 
-    private JwtTokenProvider jwtTokenProvider;
-
-
-    @Autowired
-    public JwtAuthenticationFilter(JwtUserDetailsService jwtUserDetailsService, JwtTokenProvider tokenProvider) {
-        this.jwtUserDetailsService = jwtUserDetailsService;
+    public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, JwtUserDetailsService jwtUserDetailsService) {
         this.jwtTokenProvider = tokenProvider;
+        this.jwtUserDetailsService = jwtUserDetailsService;
     }
 
     @Override

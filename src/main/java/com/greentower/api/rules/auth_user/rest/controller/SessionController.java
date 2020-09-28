@@ -9,7 +9,6 @@ import com.greentower.api.rules.auth_user.rest.dto.SessionLoginDTO;
 import com.greentower.api.rules.auth_user.service.impl.JwtUserDetailsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
@@ -25,11 +24,10 @@ public class SessionController {
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtUserDetailsService jwtUserDetailsService;
 
-    @Autowired
     public SessionController(MapperUtil modelMapper, JwtUserDetailsService jwtUserDetailsService, JwtTokenProvider jwtTokenProvider){
         this.modelMapper = modelMapper;
-        this.jwtUserDetailsService = jwtUserDetailsService;
         this.jwtTokenProvider = jwtTokenProvider;
+        this.jwtUserDetailsService = jwtUserDetailsService;
     }
 
     @PostMapping(value = "/sessions", produces = {MediaType.APPLICATION_JSON_VALUE})

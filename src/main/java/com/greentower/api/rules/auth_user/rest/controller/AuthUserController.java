@@ -7,7 +7,6 @@ import com.greentower.api.rules.auth_user.rest.dto.AuthUserUpdateDTO;
 import com.greentower.api.rules.auth_user.service.AuthUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,6 @@ public class AuthUserController {
     private final AuthUserService authUserService;
     private final MapperUtil modelMapper;
 
-    @Autowired
     public AuthUserController(AuthUserService authUserService, MapperUtil modelMapper){
         this.authUserService = authUserService;
         this.modelMapper = modelMapper;

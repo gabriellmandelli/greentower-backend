@@ -3,7 +3,6 @@ package com.greentower.api.core.config;
 import com.greentower.api.core.security.JwtAuthenticationFilter;
 import com.greentower.api.rules.auth_user.domain.enums.Role;
 import com.greentower.api.rules.auth_user.service.impl.JwtUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,7 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtUserDetailsService jwtUserDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    @Autowired
     public SecurityConfig(PasswordEncoder passwordEncoder, JwtUserDetailsService jwtUserDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.passwordEncoder = passwordEncoder;
         this.jwtUserDetailsService = jwtUserDetailsService;
