@@ -60,9 +60,6 @@ public class Person implements Serializable, GenericClass {
     @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
 
-    @Column(name = "address")
-    private String address;
-
     public UUID getId() {
         return id;
     }
@@ -143,15 +140,7 @@ public class Person implements Serializable, GenericClass {
         this.cpf = cpf;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Person(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String email, Gender gender, Date dateOfBirth, String naturalness, String nationality, String cpf, String address) {
+    public Person(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String email, Gender gender, Date dateOfBirth, String naturalness, String nationality, String cpf) {
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -162,7 +151,6 @@ public class Person implements Serializable, GenericClass {
         this.naturalness = naturalness;
         this.nationality = nationality;
         this.cpf = cpf;
-        this.address = address;
     }
 
     public Person(){

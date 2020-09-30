@@ -26,7 +26,6 @@ public class PersonEntityTest {
         person.setNaturalness("Veneziano");
         person.setNationality("Brasileiro");
         person.setCpf("12345678912");
-        person.setAddress("Estrado geral, linha mandelli, SN");
 
         Assert.assertEquals(person.getId(), personId);
         Assert.assertEquals(person.getName(), "GreenTower");
@@ -36,7 +35,5 @@ public class PersonEntityTest {
         Assert.assertEquals(person.getNaturalness(), "Veneziano");
         Assert.assertEquals(person.getNationality(), "Brasileiro");
         Assert.assertEquals(person.getCpf(), "12345678912");
-        Assert.assertEquals(person.getAddress(), "Estrado geral, linha mandelli, SN");
-
     }
 }

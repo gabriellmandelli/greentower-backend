@@ -59,9 +59,4 @@ public class PersonValidatorTest {
         Assert.assertFalse(this.personValidator.isPersonCpfValid(person));
     }
 
-    @Test
-    public void testPersonAddressInvalid() {
-        Person person = new Person();
-        Assert.assertFalse(this.personValidator.isPersonAddressValid(person));
-    }
 }

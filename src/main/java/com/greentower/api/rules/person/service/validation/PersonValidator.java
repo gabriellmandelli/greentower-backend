@@ -40,8 +40,4 @@ public class PersonValidator {
     public Boolean isPersonEmailValid(Person person){
         return (ValidatorUtil.isValidEmailAddress(person.getEmail()) && !person.getEmail().isEmpty());
     }
-
-    public Boolean isPersonAddressValid(Person person){
-        return (!(person.getAddress() == null || person.getAddress().isEmpty()));
-    }
 }
