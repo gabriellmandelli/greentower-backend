@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "security.jwt")
 public class JwtPropertiesConfig {
+
     String signingKey;
     Long expirationTimeMinutes;
 

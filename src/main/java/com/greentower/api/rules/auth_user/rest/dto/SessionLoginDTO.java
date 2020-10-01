@@ -2,12 +2,16 @@ package com.greentower.api.rules.auth_user.rest.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotBlank;
+
 public class SessionLoginDTO {
 
-    @ApiModelProperty(value = "User email", example = "greensoftware@greensoftware.com", required = true)
+    @ApiModelProperty(value = "User email", example = "greentower@greentower.com", required = true)
+    @NotBlank
     private String email;
 
     @ApiModelProperty(value = "User password", example = "******")
+    @NotBlank
     private String password;
 
     public String getEmail() {

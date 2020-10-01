@@ -7,12 +7,12 @@ import com.greentower.api.rules.person.service.PersonService;
 import com.greentower.api.rules.person.service.validation.PersonValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -20,14 +20,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/person/v1")
 @Api(value = "Person Api Rest v1")
-@CrossOrigin(origins = "Access-Control-Allow-Origin: *")
+@CrossOrigin(value = "*")
 public class PersonController {
 
     private final MapperUtil modelMapper;
     private final PersonService personService;
     private final PersonValidator personValidator;
 
-    @Autowired
     public PersonController(MapperUtil modelMapper, PersonService personService, PersonValidator personValidator){
         this.modelMapper = modelMapper;
         this.personService = personService;
@@ -37,9 +36,9 @@ public class PersonController {
     @PostMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Create person")
-    public ResponseEntity<PersonDTO> save(@RequestBody PersonDTO personDTO){
-        Person person = modelMapper.mapTo(personDTO, Person.class);
+    public ResponseEntity<PersonDTO> save(@RequestBody @Valid PersonDTO personDTO){
 
+        Person person = modelMapper.mapTo(personDTO, Person.class);
 
         personValidator.isPersonNameValid(person);
         personValidator.isPersonEmailValid(person);
@@ -54,7 +53,7 @@ public class PersonController {
     @PutMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Update person")
-    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO personDTO, @PathVariable("id")UUID id){
+    public ResponseEntity<PersonDTO> update(@RequestBody @Valid PersonDTO personDTO, @PathVariable("id")UUID id){
         Person person = modelMapper.mapTo(personDTO, Person.class);
         person.setId(id);
 

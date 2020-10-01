@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.greentower.api.rules.person.domain.enums.Gender;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,16 +14,20 @@ public class PersonDTO {
     private UUID id;
 
     @ApiModelProperty(value = "Person name", example = "Gabriel Mandelli", required = true)
+    @NotBlank
     private String name;
 
     @ApiModelProperty(value = "Person email", example = "gabrielmandelli@hotmail.com")
+    @NotBlank
     private String email;
 
     @ApiModelProperty(value = "Person gender", example = "MALE")
+    @NotBlank
     private Gender gender;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "Person date of birth", example = "yyyy-MM-dd", required = true)
+    @NotBlank
     private Date dateOfBirth;
 
     @ApiModelProperty(value = "Person naturalness", example = "Veneziano")
@@ -32,6 +37,7 @@ public class PersonDTO {
     private String nationality;
 
     @ApiModelProperty(value = "Person cpf", example = "58362664096")
+    @NotBlank
     private String cpf;
 
     public UUID getId() {
