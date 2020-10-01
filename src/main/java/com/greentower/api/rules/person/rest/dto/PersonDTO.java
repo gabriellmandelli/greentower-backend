@@ -5,6 +5,7 @@ import com.greentower.api.rules.person.domain.enums.Gender;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 
@@ -22,12 +23,11 @@ public class PersonDTO {
     private String email;
 
     @ApiModelProperty(value = "Person gender", example = "MALE")
-    @NotBlank
     private Gender gender;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "Person date of birth", example = "yyyy-MM-dd", required = true)
-    @NotBlank
+    @NotNull
     private Date dateOfBirth;
 
     @ApiModelProperty(value = "Person naturalness", example = "Veneziano")
