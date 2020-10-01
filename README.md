@@ -15,11 +15,11 @@ To access all endpoints in the Insomnia, import Json available on [Api-Docs](htt
 
 The frontend of that application is in [greensoftware-frontend](https://github.com/gabriellmandelli/greentower-frontend).
 
-## Disponível
+## Available
 - Email and password to login:
     ```
     {
-        email: "greensoftware@greensoftware.com",
+        email: "greentower@greentower.com",
         password: "123456"
     }
     ```
@@ -44,6 +44,6 @@ The frontend of that application is in [greensoftware-frontend](https://github.c
 ## Tools used
 - [Spring Initializr](https://start.spring.io/)
 - [Heroku](https://www.heroku.com/)
-- IntelliJIDE
-- Insomnia
-- QueryPie
+- [IntelliJIDE](https://www.jetbrains.com/idea/download/)
+- [Insomnia](https://insomnia.rest/)
+- [QueryPie](https://www.querypie.com/)
