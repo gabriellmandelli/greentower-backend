@@ -29,7 +29,7 @@ public class JwtTokenProvider {
                 .getBody();
     }
 
-    private Boolean isTokenExpirado(String token) {
+    private Boolean isExpiredToken(String token) {
         try {
             return LocalDateTime.now().isAfter(getAllClaimsFromToken(token).getExpiration().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
         } catch (Exception exception) {
@@ -38,14 +38,14 @@ public class JwtTokenProvider {
     }
 
     public String generateTokenByAuthUser(User user){
-        Date dataExpiracao = Date.from(LocalDateTime.now().plusMinutes(jwtPropertiesConfig.getExpirationTimeMinutes()).atZone(ZoneId.systemDefault()).toInstant());
+        Date expirationDate = Date.from(LocalDateTime.now().plusMinutes(jwtPropertiesConfig.getExpirationTimeMinutes()).atZone(ZoneId.systemDefault()).toInstant());
 
         return Jwts.builder()
                 .setSubject(user.getUsername())
                 .claim(AUTHORITIES_KEY,user.getAuthorities())
                 .signWith(SignatureAlgorithm.HS256, jwtPropertiesConfig.getSigningKey())
                 .setIssuedAt(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
-                .setExpiration(dataExpiracao)
+                .setExpiration(expirationDate)
                 .compact();
     }
 
@@ -58,6 +58,6 @@ public class JwtTokenProvider {
     }
 
     public Boolean validateToken(String token, User user){
-        return this.getEmailFromToken(token).map( email -> email.equals(user.getUsername()) && !isTokenExpirado(token)).orElse(false);
+        return this.getEmailFromToken(token).map( email -> email.equals(user.getUsername()) && !isExpiredToken(token)).orElse(false);
     }
 }

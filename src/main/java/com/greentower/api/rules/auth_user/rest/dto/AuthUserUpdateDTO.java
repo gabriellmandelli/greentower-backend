@@ -2,21 +2,25 @@ package com.greentower.api.rules.auth_user.rest.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotBlank;
+
 public class AuthUserUpdateDTO {
 
     @ApiModelProperty(value = "User name", example = "Green Software", required = true)
+    @NotBlank
     private String name;
 
-    @ApiModelProperty(value = "User email", example = "greensoftware@greensoftware.com", required = true)
+    @ApiModelProperty(value = "User email", example = "greentower@greentower.com", required = true)
+    @NotBlank
     private String email;
 
     @ApiModelProperty(value = "User password", example = "******")
     private String oldPassword;
 
-    @ApiModelProperty(value = "New user password", example = "******", required = true)
+    @ApiModelProperty(value = "New user password", example = "******")
     private String password;
 
-    @ApiModelProperty(value = "New user password confirmation", example = "******", required = true)
+    @ApiModelProperty(value = "New user password confirmation", example = "******")
     private String confirmPassword;
 
     public String getName() {

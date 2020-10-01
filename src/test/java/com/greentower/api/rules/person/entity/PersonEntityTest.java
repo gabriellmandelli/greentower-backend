@@ -1,4 +1,4 @@
-package com.greentower.api.rules.person.service.impl;
+package com.greentower.api.rules.person.entity;
 
 import com.greentower.api.rules.person.domain.entity.Person;
 import com.greentower.api.rules.person.domain.enums.Gender;
@@ -15,14 +15,14 @@ public class PersonEntityTest {
     @Test
     public void testPerson() {
         Person person = new Person();
-        Date dataNascimento = new Date();
+        Date dateOfBirth = new Date();
         UUID personId = UUID.randomUUID();
 
         person.setId(personId);
         person.setName("GreenTower");
         person.setEmail("greentower@greentower.com");
         person.setGender(Gender.MALE);
-        person.setDateOfBirth(dataNascimento);
+        person.setDateOfBirth(dateOfBirth);
         person.setNaturalness("Veneziano");
         person.setNationality("Brasileiro");
         person.setCpf("12345678912");
@@ -31,7 +31,7 @@ public class PersonEntityTest {
         Assert.assertEquals(person.getName(), "GreenTower");
         Assert.assertEquals(person.getEmail(), "greentower@greentower.com");
         Assert.assertEquals(person.getGender(), Gender.MALE);
-        Assert.assertEquals(person.getDateOfBirth(), dataNascimento);
+        Assert.assertEquals(person.getDateOfBirth(), dateOfBirth);
         Assert.assertEquals(person.getNaturalness(), "Veneziano");
         Assert.assertEquals(person.getNationality(), "Brasileiro");
         Assert.assertEquals(person.getCpf(), "12345678912");

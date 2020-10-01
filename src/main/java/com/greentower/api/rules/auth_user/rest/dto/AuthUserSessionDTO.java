@@ -9,7 +9,7 @@ public class AuthUserSessionDTO {
     @ApiModelProperty(value = "User id")
     private UUID id;
 
-    @ApiModelProperty(value = "User email", example = "greensoftware@greensoftware.com", required = true)
+    @ApiModelProperty(value = "User email", example = "greentower@greentower.com", required = true)
     private String email;
 
     @ApiModelProperty(value = "User name", example = "Green Software", required = true)

@@ -2,13 +2,11 @@ package com.greentower.api.core.config;
 
 import com.greentower.api.core.security.JwtAuthenticationFilter;
 import com.greentower.api.rules.auth_user.domain.enums.Role;
-import com.greentower.api.rules.auth_user.service.impl.JwtUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.greentower.api.rules.auth_user.service.impl.JwtUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,22 +16,29 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final JwtUserDetailsService jwtUserDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl;
 
-    @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder, JwtUserDetailsService jwtUserDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
+    private String[] SWAGGER_WHITE_LIST = {
+            "/v2/api-docs",
+            "/configuration/ui",
+            "/swagger-resources/**",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**"
+    };
+
+    public SecurityConfig(PasswordEncoder passwordEncoder, JwtAuthenticationFilter jwtAuthenticationFilter, JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl) {
         this.passwordEncoder = passwordEncoder;
-        this.jwtUserDetailsService = jwtUserDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.jwtUserDetailsServiceImpl = jwtUserDetailsServiceImpl;
     }
 
-    @Override
     @Bean
+    @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
@@ -41,23 +46,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService(jwtUserDetailsService)
+                .userDetailsService(jwtUserDetailsServiceImpl)
                 .passwordEncoder(passwordEncoder);
     }
 
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                .cors()
+                .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/v2/api-docs").permitAll()
-                .antMatchers("/configuration/ui").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/configuration/security").permitAll()
-                .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/webjars/**").permitAll()
+                .antMatchers(SWAGGER_WHITE_LIST).permitAll()
                 .antMatchers("/person/v1/**").hasAnyRole(Role.ADMIN.toString())
-                .antMatchers("/person/v2/**").hasAnyRole(Role.ADMIN.toString())
                 .antMatchers("/users").permitAll()
                 .antMatchers("/sessions").permitAll()
                 .anyRequest().authenticated()

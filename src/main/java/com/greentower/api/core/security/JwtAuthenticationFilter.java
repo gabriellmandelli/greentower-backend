@@ -1,14 +1,12 @@
 package com.greentower.api.core.security;
 
 import com.google.common.net.HttpHeaders;
-import com.greentower.api.rules.auth_user.service.impl.JwtUserDetailsService;
+import com.greentower.api.rules.auth_user.service.impl.JwtUserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -24,15 +22,12 @@ import java.util.Optional;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private JwtUserDetailsService jwtUserDetailsService;
-
     private JwtTokenProvider jwtTokenProvider;
+    private JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl;
 
-
-    @Autowired
-    public JwtAuthenticationFilter(JwtUserDetailsService jwtUserDetailsService, JwtTokenProvider tokenProvider) {
-        this.jwtUserDetailsService = jwtUserDetailsService;
+    public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, JwtUserDetailsServiceImpl jwtUserDetailsServiceImpl) {
         this.jwtTokenProvider = tokenProvider;
+        this.jwtUserDetailsServiceImpl = jwtUserDetailsServiceImpl;
     }
 
     @Override
@@ -44,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = authorizationHeader.replace("Bearer ", "");
             this.checkToken(token, new WebAuthenticationDetailsSource().buildDetails(request));
         }else{
-            logger.error("Não foi possível encontrar o prefixo bearer, o Header vai ser ignorado.");
+            logger.error("The Bearer prefix could not be found, the Header will not be used.");
         }
 
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -64,9 +59,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             Optional<String> email = jwtTokenProvider.getEmailFromToken(token);
 
             if (email.isPresent() && SecurityContextHolder.getContext().getAuthentication() == null){
-                User user = (User) jwtUserDetailsService.loadUserByUsername(email.get());
-                if (jwtTokenProvider.validateToken(token, user)){
-                    UsernamePasswordAuthenticationToken authentication = jwtTokenProvider.getAuthentication(token, user);
+                CustomUserDetails customUserDetails = jwtUserDetailsServiceImpl.loadUserByUsername(email.get());
+                if (jwtTokenProvider.validateToken(token, customUserDetails)){
+                    UsernamePasswordAuthenticationToken authentication = jwtTokenProvider.getAuthentication(token, customUserDetails);
                     authentication.setDetails(authDetails);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }

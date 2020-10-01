@@ -3,6 +3,7 @@ package com.greentower.api.rules.auth_user.rest.dto;
 import com.greentower.api.rules.auth_user.domain.enums.Role;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 public class AuthUserDTO {
@@ -10,13 +11,16 @@ public class AuthUserDTO {
     @ApiModelProperty(value = "User id")
     private UUID id;
 
-    @ApiModelProperty(value = "User email", example = "greensoftware@greensoftware.com", required = true)
+    @ApiModelProperty(value = "User email", example = "greentower@greentower.com", required = true)
+    @NotBlank
     private String email;
 
     @ApiModelProperty(value = "User name", example = "Green Software", required = true)
+    @NotBlank
     private String name;
 
     @ApiModelProperty(value = "User password", example = "******")
+    @NotBlank
     private String password;
 
     @ApiModelProperty(value = "User role", example = "ADMIN", required = true)
