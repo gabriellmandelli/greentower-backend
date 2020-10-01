@@ -1,14 +1,8 @@
 package com.greentower.api.rules.person.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.greentower.api.core.generic.GenericClass;
+import com.greentower.api.core.generic.AbstractAuditingEntity;
 import com.greentower.api.rules.person.domain.enums.Gender;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,24 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "person")
-public class Person implements Serializable, GenericClass {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Type(type="pg-uuid")
-    private UUID id;
-
-    @CreationTimestamp
-    @CreatedDate
-    @JsonIgnore
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @LastModifiedDate
-    @Column(name = "updated_at", nullable = false)
-    @JsonIgnore
-    private LocalDateTime updatedAt;
+public class Person extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -59,30 +36,6 @@ public class Person implements Serializable, GenericClass {
 
     @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     public String getName() {
         return name;
@@ -140,10 +93,8 @@ public class Person implements Serializable, GenericClass {
         this.cpf = cpf;
     }
 
-    public Person(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String email, Gender gender, Date dateOfBirth, String naturalness, String nationality, String cpf) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Person(UUID id, Long sequential, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String email, Gender gender, Date dateOfBirth, String naturalness, String nationality, String cpf) {
+        super(id, sequential, createdAt, updatedAt);
         this.name = name;
         this.email = email;
         this.gender = gender;
@@ -154,6 +105,7 @@ public class Person implements Serializable, GenericClass {
     }
 
     public Person(){
-
+        super();
     }
+
 }
