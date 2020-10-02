@@ -1,5 +1,6 @@
 package com.greentower.api.rules.auth_user.rest.controller;
 
+import com.greentower.api.core.security.CustomUserDetails;
 import com.greentower.api.core.security.JwtTokenProvider;
 import com.greentower.api.core.util.MapperUtil;
 import com.greentower.api.rules.auth_user.domain.entity.AuthUser;
@@ -11,7 +12,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,9 +35,10 @@ public class SessionController {
     @PostMapping(value = "/sessions", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Session Login")
     public ResponseEntity<PayloadSessionDTO> login(@RequestBody  @Valid SessionLoginDTO sessionLoginDTO){
-        User userDetails = jwtUserDetailsServiceImpl.AuthUserAuthenticate(sessionLoginDTO);
+        CustomUserDetails customUserDetails = jwtUserDetailsServiceImpl.AuthUserAuthenticate(sessionLoginDTO);
         AuthUser authUser = jwtUserDetailsServiceImpl.findByEmail(sessionLoginDTO.getEmail());
-        PayloadSessionDTO payloadSessionDTO = new PayloadSessionDTO(jwtTokenProvider.generateTokenByAuthUser(userDetails), modelMapper.mapTo(authUser, AuthUserSessionDTO.class));
-        return ResponseEntity.ok(payloadSessionDTO);
+        String tokenReturn = jwtTokenProvider.generateTokenByAuthUser(customUserDetails);
+        AuthUserSessionDTO authUserSessionDTO = modelMapper.mapTo(authUser, AuthUserSessionDTO.class);
+        return ResponseEntity.ok(new PayloadSessionDTO(tokenReturn, authUserSessionDTO));
     }
 }

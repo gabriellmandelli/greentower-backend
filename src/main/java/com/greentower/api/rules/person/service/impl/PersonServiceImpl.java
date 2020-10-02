@@ -3,9 +3,8 @@ package com.greentower.api.rules.person.service.impl;
 import com.greentower.api.rules.person.domain.entity.Person;
 import com.greentower.api.rules.person.domain.repository.PersonRepository;
 import com.greentower.api.rules.person.service.PersonService;
-import org.springframework.http.HttpStatus;
+import com.greentower.api.rules.person.util.exception.PersonNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -42,6 +41,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person findById(UUID personId) {
-        return personRepository.findById(personId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Person id: " + personId.toString() + " not found."));
+        return personRepository.findById(personId).orElseThrow(PersonNotFoundException::new);
     }
 }

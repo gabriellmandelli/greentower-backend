@@ -5,10 +5,9 @@ import com.greentower.api.rules.auth_user.domain.enums.Role;
 import com.greentower.api.rules.auth_user.domain.repository.AuthUserRepository;
 import com.greentower.api.rules.auth_user.rest.dto.AuthUserUpdateDTO;
 import com.greentower.api.rules.auth_user.service.AuthUserService;
-import org.springframework.http.HttpStatus;
+import com.greentower.api.rules.auth_user.util.exception.AuthUserNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -71,6 +70,6 @@ public class AuthUserServiceImpl implements AuthUserService {
 
     @Override
     public AuthUser findByEmail(String authUserEmail) {
-        return authUserRepository.findByemail(authUserEmail).orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found in database"));
+        return authUserRepository.findByemail(authUserEmail).orElseThrow(AuthUserNotFoundException::new);
     }
 }

@@ -38,4 +38,15 @@ public class AuthUserSessionDTO {
     public void setName(String name) {
         this.name = name;
     }
+
+    public AuthUserSessionDTO(UUID id, String email, String name) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+    }
+
+    public AuthUserSessionDTO(){
+
+    }
+
 }

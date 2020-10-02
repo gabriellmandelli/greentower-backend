@@ -4,13 +4,12 @@ import com.greentower.api.core.security.CustomUserDetails;
 import com.greentower.api.rules.auth_user.domain.entity.AuthUser;
 import com.greentower.api.rules.auth_user.domain.repository.AuthUserRepository;
 import com.greentower.api.rules.auth_user.rest.dto.SessionLoginDTO;
-import org.springframework.http.HttpStatus;
+import com.greentower.api.rules.auth_user.util.exception.AuthUserUnauthorizedException;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
@@ -25,7 +24,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     public AuthUser findByEmail(String email){
         return authUserRepository.findByemail(email).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Email or password not matches")
+                () -> new AuthUserUnauthorizedException("Email or password not matches")
         );
     }
 
@@ -45,7 +44,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
         if (passwordEncoder.matches(sessionLoginDTO.getPassword(), userDetails.getPassword())){
             return userDetails;
         }else{
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Email or password not matches");
+            throw new AuthUserUnauthorizedException("Email or password not matches");
         }
     }
 }
