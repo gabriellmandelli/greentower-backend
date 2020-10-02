@@ -1,10 +1,12 @@
 package com.greentower.api.rules.person.rest.controller;
 
+import com.greentower.api.core.error.ObjectError;
 import com.greentower.api.core.util.MapperUtil;
 import com.greentower.api.rules.person.domain.entity.Person;
 import com.greentower.api.rules.person.rest.dto.PersonDTO;
 import com.greentower.api.rules.person.service.PersonService;
 import com.greentower.api.rules.person.service.validation.PersonValidator;
+import com.greentower.api.rules.person.util.exception.PersonValidationErrorException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
@@ -36,15 +38,15 @@ public class PersonController {
     @PostMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Create person")
-    public ResponseEntity<PersonDTO> save(@RequestBody @Valid PersonDTO personDTO){
+    public ResponseEntity<PersonDTO> save(@RequestBody @Valid PersonDTO personDTO) throws PersonValidationErrorException {
 
         Person person = modelMapper.mapTo(personDTO, Person.class);
 
-        personValidator.isPersonNameValid(person);
-        personValidator.isPersonEmailValid(person);
-        personValidator.isPersonDateOfBirthValid(person);
-        personValidator.isPersonCpfValid(person);
-        personValidator.isPersonCpfExistsInDataBase(person);
+        List<ObjectError> errorList = personValidator.getErrorListFromPerson(person);
+
+        if(!errorList.isEmpty()){
+            throw new PersonValidationErrorException(errorList);
+        }
 
         person = personService.save(person);
         return ResponseEntity.ok(modelMapper.mapTo(person, PersonDTO.class));
@@ -53,15 +55,15 @@ public class PersonController {
     @PutMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Update person")
-    public ResponseEntity<PersonDTO> update(@RequestBody @Valid PersonDTO personDTO, @PathVariable("id")UUID id){
+    public ResponseEntity<PersonDTO> update(@RequestBody @Valid PersonDTO personDTO, @PathVariable("id")UUID id) throws PersonValidationErrorException {
         Person person = modelMapper.mapTo(personDTO, Person.class);
         person.setId(id);
 
-        personValidator.isPersonNameValid(person);
-        personValidator.isPersonEmailValid(person);
-        personValidator.isPersonDateOfBirthValid(person);
-        personValidator.isPersonCpfValid(person);
-        personValidator.isPersonCpfExistsInDataBase(person);
+        List<ObjectError> errorList = personValidator.getErrorListFromPerson(person);
+
+        if(!errorList.isEmpty()){
+            throw new PersonValidationErrorException(errorList);
+        }
 
         person = personService.update(id, person);
         return ResponseEntity.ok(modelMapper.mapTo(person, PersonDTO.class));
