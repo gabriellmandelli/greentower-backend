@@ -18,7 +18,7 @@ public abstract class AbstractAuditingEntity implements GenericClass {
     @Type(type="pg-uuid")
     private UUID id;
 
-    @Column(name = "sequential", columnDefinition="serial")
+    @Column(name = "sequential", columnDefinition="serial", updatable = false)
     @Generated(GenerationTime.INSERT)
     private Long sequential;
 
