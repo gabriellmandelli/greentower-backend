@@ -3,6 +3,7 @@ package com.greentower.api.rules.auth_user.rest.controller;
 import com.greentower.api.core.util.MapperUtil;
 import com.greentower.api.rules.auth_user.domain.entity.AuthUser;
 import com.greentower.api.rules.auth_user.rest.dto.AuthUserDTO;
+import com.greentower.api.rules.auth_user.rest.dto.AuthUserSessionDTO;
 import com.greentower.api.rules.auth_user.rest.dto.AuthUserUpdateDTO;
 import com.greentower.api.rules.auth_user.service.AuthUserService;
 import io.swagger.annotations.Api;
@@ -31,16 +32,16 @@ public class AuthUserController {
     @PostMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Create User")
-    public ResponseEntity<AuthUserDTO> save(@RequestBody @Valid AuthUserDTO authUserDTO){
+    public ResponseEntity<AuthUserSessionDTO> save(@RequestBody @Valid AuthUserDTO authUserDTO){
         AuthUser authUserDB = modelMapper.mapTo(authUserDTO, AuthUser.class);
-        return ResponseEntity.ok(modelMapper.mapTo(authUserService.save(authUserDB), AuthUserDTO.class));
+        return ResponseEntity.ok(modelMapper.mapTo(authUserService.save(authUserDB), AuthUserSessionDTO.class));
     }
 
     @PutMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Update User")
-    public ResponseEntity<AuthUserDTO> update(@RequestBody @Valid AuthUserUpdateDTO authUserUpdateDTO){
-        return ResponseEntity.ok(modelMapper.mapTo(authUserService.update(authUserUpdateDTO), AuthUserDTO.class));
+    public ResponseEntity<AuthUserSessionDTO> update(@RequestBody @Valid AuthUserUpdateDTO authUserUpdateDTO){
+        return ResponseEntity.ok(modelMapper.mapTo(authUserService.update(authUserUpdateDTO), AuthUserSessionDTO.class));
     }
 
 }
