@@ -5,6 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public final class AuthUserUtil {
     public static CustomUserDetails getCurrentAuthUser(){
-        return (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication();
+        return (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

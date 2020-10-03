@@ -28,7 +28,7 @@ The frontend of that application is in [greensoftware-frontend](https://github.c
 - Documentation created by Swagger [available here](https://greentower-backend.herokuapp.com/swagger-ui.html#/)
 - Docker hosted on [DockerHub](https://hub.docker.com/r/gabriellmandelli/greentower), to execute run:  
     ```
-    docker pull gabriellmandelli/softplayer-java-apply:latest
+    docker pull gabriellmandelli/greentower-backend:latest
     ```
 
 ## Dependencies

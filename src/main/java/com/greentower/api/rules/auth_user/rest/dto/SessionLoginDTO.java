@@ -29,4 +29,13 @@ public class SessionLoginDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public SessionLoginDTO(@NotBlank String email, @NotBlank String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public SessionLoginDTO(){
+
+    }
 }
