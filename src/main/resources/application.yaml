@@ -3,14 +3,12 @@ server:
 
 security:
   jwt:
-    expiration-time-minutes: 300
+    expiration-time-minutes: 9000000
     signing-key: 5X4DZyu9TM2O3NdJcSr
 
 spring:
-  datasource:
-    url: jdbc:postgresql://ec2-54-144-177-189.compute-1.amazonaws.com:5432/d8iervn08olq2d
-    username: qhhiqiyhcutwnj
-    password: cc014d4a81eb69d483f13218d5c35358b63da918b782387eb0e7a01e70545171
+  profiles:
+    active: test
 
   jpa:
     show-sql: true
